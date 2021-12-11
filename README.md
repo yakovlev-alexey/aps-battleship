@@ -1,5 +1,4 @@
-
-[![Build status](https://dev.azure.com/APS-SD-Stewards/APS-SD/_apis/build/status/proscrumdev.battleship-cpp-CI)](https://dev.azure.com/APS-SD-Stewards/APS-SD/_build/latest?definitionId=22)
+![Build status](https://gitlab.com/aps-sd/aps-sd-dec-2021/battleship-nodejs-APS-SD-Dec-2021/badges/master/pipeline.svg)
 
 # Battleship NodeJs
 
