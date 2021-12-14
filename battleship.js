@@ -4,7 +4,9 @@ const cliColor = require('cli-color');
 const beep = require('beepbeep');
 const position = require("./GameController/position.js");
 const letters = require("./GameController/letters.js");
+
 const prompt = require("./utils/prompt.js");
+const delim = require("./utils/delim.js");
 
 class Battleship {
 
@@ -43,7 +45,7 @@ class Battleship {
 
         do {
             console.log();
-            console.log("Player, it's your turn");
+            console.log("< Player, it's your turn");
             prompt("Enter coordinates for your shot :")
             var position = Battleship.ParsePosition(readline.question());
             var isHit = gameController.CheckIsHit(this.enemyFleet, position);
@@ -65,7 +67,7 @@ class Battleship {
             var computerPos = this.GetRandomPosition();
             var isHit = gameController.CheckIsHit(this.myFleet, computerPos);
             console.log();
-            console.log(`Computer shot in ${computerPos.column}${computerPos.row} and ` + (isHit ? cliColor.red(`has hit your ship !`) : cliColor.yellow(`miss`)));
+            console.log(`> Computer shot in ${computerPos.column}${computerPos.row} and ` + (isHit ? cliColor.red(`has hit your ship !`) : cliColor.yellow(`miss`)));
             if (isHit) {
                 beep();
 
@@ -78,6 +80,8 @@ class Battleship {
                 console.log("                 -\\  \\     /  /-");
                 console.log("                   \\  \\   /  /");
             }
+            console.log()
+            delim();
         }
         while (true);
     }
