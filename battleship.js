@@ -7,6 +7,7 @@ const letters = require("./GameController/letters.js");
 
 const prompt = require("./utils/prompt.js");
 const delim = require("./utils/delim.js");
+const makeMenu = require("./utils/makeMenu.js");
 
 class Battleship {
 
@@ -25,6 +26,17 @@ class Battleship {
         console.log(cliColor.magenta("|                        Welcome to Battleship                         BB-61/"));
         console.log(cliColor.magenta(" \\_________________________________________________________________________|"));
         console.log();
+        
+        this.showMenu = makeMenu({
+            '1': {
+                title: 'Make a turn',
+                callback: this.makeTurn.bind(this),
+            },
+            '2': {
+                title: 'Exit',
+                callback: function () {process.exit(0)}
+            }
+        })
 
         this.InitializeGame();
         this.StartGame();
@@ -44,12 +56,12 @@ class Battleship {
         console.log("    \"\"\"\"");
 
         do {
-            
+            this.showMenu()
         } while (true);
     }
 
     makeTurn() {
-        console.log();
+        delim();
         console.log("< Player, it's your turn");
         var position = Battleship.ParsePosition(prompt("Enter coordinates for your shot :"));
         var isHit = gameController.CheckIsHit(this.enemyFleet, position);
@@ -84,7 +96,6 @@ class Battleship {
             console.log("                 -\\  \\     /  /-");
             console.log("                   \\  \\   /  /");
         }
-        console.log()
         delim();
     }
 

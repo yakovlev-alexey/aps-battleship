@@ -1,4 +1,4 @@
-const prompt = require("./utils/prompt.js");
+const prompt = require("./prompt.js");
 
 /**
  * @param {Object} options

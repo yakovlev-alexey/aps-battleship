@@ -1,3 +1,3 @@
 module.exports = function delim() {
-    console.log('-------------------------')
+    console.log('\n-------------------------\n')
 }
