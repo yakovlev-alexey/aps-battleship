@@ -6,7 +6,8 @@
   "scripts": {
     "mocha": "mocha ./**/*Tests.js",
     "cucumber": "./node_modules/.bin/cucumber-js ./GameController_ATDD",
-    "test": "nyc --nycrc-path ./.nycrc mocha ./**/*Tests.js"
+    "test": "nyc --nycrc-path ./.nycrc mocha ./**/*Tests.js",
+    "lint": "eslint **/*.js"
   },
   "author": "",
   "license": "ISC",
@@ -39,6 +40,7 @@
     "@cucumber/cucumber": "^7.3.1",
     "cucumber-junit": "^1.7.1",
     "mocha-junit-reporter": "^2.0.2",
-    "nyc": "^15.1.0"
+    "nyc": "^15.1.0",
+    "eslint": "^8.4.1"
   }
 }

@@ -36,6 +36,7 @@ describe('checkIsHitTests', function () {
     var ships = gameController.InitializeShips();
     assert.throws(
       () => {
+        /* eslint-disable-next-line */
         var actual = gameController.CheckIsHit(ships, undefined);
       }
     )
@@ -44,6 +45,7 @@ describe('checkIsHitTests', function () {
   it('should throw an exception if ship is undefined', function () {
     assert.throws(
       () => {
+        /* eslint-disable-next-line */
         var actual = gameController.CheckIsHit(undefined, new position(letters.G, 1));
       }
     )
