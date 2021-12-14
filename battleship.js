@@ -46,8 +46,7 @@ class Battleship {
         do {
             console.log();
             console.log("< Player, it's your turn");
-            prompt("Enter coordinates for your shot :")
-            var position = Battleship.ParsePosition(readline.question());
+            var position = Battleship.ParsePosition(prompt("Enter coordinates for your shot :"));
             var isHit = gameController.CheckIsHit(this.enemyFleet, position);
             if (isHit) {
                 beep();
@@ -116,8 +115,7 @@ class Battleship {
             console.log();
             console.log(`Please enter the positions for the ${ship.name} (size: ${ship.size})`);
             for (var i = 1; i < ship.size + 1; i++) {
-                prompt(`Enter position ${i} of ${ship.size} (i.e A3):`);
-                const position = readline.question();
+                const position = prompt(`Enter position ${i} of ${ship.size} (i.e A3):`);
                 ship.addPosition(Battleship.ParsePosition(position));
             }
         })
