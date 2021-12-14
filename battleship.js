@@ -44,45 +44,48 @@ class Battleship {
         console.log("    \"\"\"\"");
 
         do {
-            console.log();
-            console.log("< Player, it's your turn");
-            var position = Battleship.ParsePosition(prompt("Enter coordinates for your shot :"));
-            var isHit = gameController.CheckIsHit(this.enemyFleet, position);
-            if (isHit) {
-                beep();
+            
+        } while (true);
+    }
 
-                console.log("                \\         .  ./");
-                console.log("              \\      .:\";'.:..\"   /");
-                console.log("                  (M^^.^~~:.'\").");
-                console.log("            -   (/  .    . . \\ \\)  -");
-                console.log("               ((| :. ~ ^  :. .|))");
-                console.log("            -   (\\- |  \\ /  |  /)  -");
-                console.log("                 -\\  \\     /  /-");
-                console.log("                   \\  \\   /  /");
-            }
+    makeTurn() {
+        console.log();
+        console.log("< Player, it's your turn");
+        var position = Battleship.ParsePosition(prompt("Enter coordinates for your shot :"));
+        var isHit = gameController.CheckIsHit(this.enemyFleet, position);
+        if (isHit) {
+            beep();
 
-            console.log(isHit ? cliColor.green("Yeah ! Nice hit !") : cliColor.red("Miss"));
-
-            var computerPos = this.GetRandomPosition();
-            var isHit = gameController.CheckIsHit(this.myFleet, computerPos);
-            console.log();
-            console.log(`> Computer shot in ${computerPos.column}${computerPos.row} and ` + (isHit ? cliColor.red(`has hit your ship !`) : cliColor.yellow(`miss`)));
-            if (isHit) {
-                beep();
-
-                console.log("                \\         .  ./");
-                console.log("              \\      .:\";'.:..\"   /");
-                console.log("                  (M^^.^~~:.'\").");
-                console.log("            -   (/  .    . . \\ \\)  -");
-                console.log("               ((| :. ~ ^  :. .|))");
-                console.log("            -   (\\- |  \\ /  |  /)  -");
-                console.log("                 -\\  \\     /  /-");
-                console.log("                   \\  \\   /  /");
-            }
-            console.log()
-            delim();
+            console.log("                \\         .  ./");
+            console.log("              \\      .:\";'.:..\"   /");
+            console.log("                  (M^^.^~~:.'\").");
+            console.log("            -   (/  .    . . \\ \\)  -");
+            console.log("               ((| :. ~ ^  :. .|))");
+            console.log("            -   (\\- |  \\ /  |  /)  -");
+            console.log("                 -\\  \\     /  /-");
+            console.log("                   \\  \\   /  /");
         }
-        while (true);
+
+        console.log(isHit ? cliColor.green("Yeah ! Nice hit !") : cliColor.red("Miss"));
+
+        var computerPos = this.GetRandomPosition();
+        var isHit = gameController.CheckIsHit(this.myFleet, computerPos);
+        console.log();
+        console.log(`> Computer shot in ${computerPos.column}${computerPos.row} and ` + (isHit ? cliColor.red(`has hit your ship !`) : cliColor.yellow(`miss`)));
+        if (isHit) {
+            beep();
+
+            console.log("                \\         .  ./");
+            console.log("              \\      .:\";'.:..\"   /");
+            console.log("                  (M^^.^~~:.'\").");
+            console.log("            -   (/  .    . . \\ \\)  -");
+            console.log("               ((| :. ~ ^  :. .|))");
+            console.log("            -   (\\- |  \\ /  |  /)  -");
+            console.log("                 -\\  \\     /  /-");
+            console.log("                   \\  \\   /  /");
+        }
+        console.log()
+        delim();
     }
 
     static ParsePosition(input) {
