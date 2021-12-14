@@ -1,4 +1,3 @@
-const readline = require('readline-sync');
 const gameController = require("./GameController/gameController.js");
 const cliColor = require('cli-color');
 const beep = require('beepbeep');
@@ -57,6 +56,7 @@ class Battleship {
 
         do {
             this.showMenu()
+        // eslint-disable-next-line no-constant-condition
         } while (true);
     }
 
@@ -81,7 +81,7 @@ class Battleship {
         console.log(isHit ? cliColor.green("Yeah ! Nice hit !") : cliColor.red("Miss"));
 
         var computerPos = this.GetRandomPosition();
-        var isHit = gameController.CheckIsHit(this.myFleet, computerPos);
+        isHit = gameController.CheckIsHit(this.myFleet, computerPos);
         console.log();
         console.log(`> Computer shot in ${computerPos.column}${computerPos.row} and ` + (isHit ? cliColor.red(`has hit your ship !`) : cliColor.yellow(`miss`)));
         if (isHit) {
