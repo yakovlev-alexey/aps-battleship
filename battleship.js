@@ -5,6 +5,10 @@ const beep = require('beepbeep');
 const position = require("./GameController/position.js");
 const letters = require("./GameController/letters.js");
 
+const prompt = require("./utils/prompt.js");
+const delim = require("./utils/delim.js");
+const makeMenu = require("./utils/makeMenu.js");
+
 class Battleship {
 
     start() {
@@ -22,6 +26,17 @@ class Battleship {
         console.log(cliColor.magenta("|                        Welcome to Battleship                         BB-61/"));
         console.log(cliColor.magenta(" \\_________________________________________________________________________|"));
         console.log();
+        
+        this.showMenu = makeMenu({
+            '1': {
+                title: 'Make a turn',
+                callback: this.makeTurn.bind(this),
+            },
+            '2': {
+                title: 'Exit',
+                callback: function () {process.exit(0)}
+            }
+        })
 
         this.InitializeGame();
         this.StartGame();
@@ -41,44 +56,47 @@ class Battleship {
         console.log("    \"\"\"\"");
 
         do {
-            console.log();
-            console.log("Player, it's your turn");
-            console.log("Enter coordinates for your shot :");
-            var position = Battleship.ParsePosition(readline.question());
-            var isHit = gameController.CheckIsHit(this.enemyFleet, position);
-            if (isHit) {
-                beep();
+            this.showMenu()
+        } while (true);
+    }
 
-                console.log("                \\         .  ./");
-                console.log("              \\      .:\";'.:..\"   /");
-                console.log("                  (M^^.^~~:.'\").");
-                console.log("            -   (/  .    . . \\ \\)  -");
-                console.log("               ((| :. ~ ^  :. .|))");
-                console.log("            -   (\\- |  \\ /  |  /)  -");
-                console.log("                 -\\  \\     /  /-");
-                console.log("                   \\  \\   /  /");
-            }
+    makeTurn() {
+        delim();
+        console.log("< Player, it's your turn");
+        var position = Battleship.ParsePosition(prompt("Enter coordinates for your shot :"));
+        var isHit = gameController.CheckIsHit(this.enemyFleet, position);
+        if (isHit) {
+            beep();
 
-            console.log(isHit ? "Yeah ! Nice hit !" : "Miss");
-
-            var computerPos = this.GetRandomPosition();
-            var isHit = gameController.CheckIsHit(this.myFleet, computerPos);
-            console.log();
-            console.log(`Computer shot in ${computerPos.column}${computerPos.row} and ` + (isHit ? `has hit your ship !` : `miss`));
-            if (isHit) {
-                beep();
-
-                console.log("                \\         .  ./");
-                console.log("              \\      .:\";'.:..\"   /");
-                console.log("                  (M^^.^~~:.'\").");
-                console.log("            -   (/  .    . . \\ \\)  -");
-                console.log("               ((| :. ~ ^  :. .|))");
-                console.log("            -   (\\- |  \\ /  |  /)  -");
-                console.log("                 -\\  \\     /  /-");
-                console.log("                   \\  \\   /  /");
-            }
+            console.log("                \\         .  ./");
+            console.log("              \\      .:\";'.:..\"   /");
+            console.log("                  (M^^.^~~:.'\").");
+            console.log("            -   (/  .    . . \\ \\)  -");
+            console.log("               ((| :. ~ ^  :. .|))");
+            console.log("            -   (\\- |  \\ /  |  /)  -");
+            console.log("                 -\\  \\     /  /-");
+            console.log("                   \\  \\   /  /");
         }
-        while (true);
+
+        console.log(isHit ? cliColor.green("Yeah ! Nice hit !") : cliColor.red("Miss"));
+
+        var computerPos = this.GetRandomPosition();
+        var isHit = gameController.CheckIsHit(this.myFleet, computerPos);
+        console.log();
+        console.log(`> Computer shot in ${computerPos.column}${computerPos.row} and ` + (isHit ? cliColor.red(`has hit your ship !`) : cliColor.yellow(`miss`)));
+        if (isHit) {
+            beep();
+
+            console.log("                \\         .  ./");
+            console.log("              \\      .:\";'.:..\"   /");
+            console.log("                  (M^^.^~~:.'\").");
+            console.log("            -   (/  .    . . \\ \\)  -");
+            console.log("               ((| :. ~ ^  :. .|))");
+            console.log("            -   (\\- |  \\ /  |  /)  -");
+            console.log("                 -\\  \\     /  /-");
+            console.log("                   \\  \\   /  /");
+        }
+        delim();
     }
 
     static ParsePosition(input) {
@@ -111,8 +129,7 @@ class Battleship {
             console.log();
             console.log(`Please enter the positions for the ${ship.name} (size: ${ship.size})`);
             for (var i = 1; i < ship.size + 1; i++) {
-                console.log(`Enter position ${i} of ${ship.size} (i.e A3):`);
-                const position = readline.question();
+                const position = prompt(`Enter position ${i} of ${ship.size} (i.e A3):`);
                 ship.addPosition(Battleship.ParsePosition(position));
             }
         })
