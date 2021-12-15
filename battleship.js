@@ -136,6 +136,11 @@ class Battleship {
   static ParsePosition(input) {
     var letter = letters.get(input.toUpperCase().substring(0, 1));
     var number = parseInt(input.substring(1, 2), 10);
+
+    if (letter === undefined || isNaN(number)) {
+      return null;
+    }
+
     return new position(letter, number);
   }
 
@@ -163,16 +168,30 @@ class Battleship {
     );
 
     this.myFleet.forEach(function (ship) {
-      console.log();
       console.log(
-        `Please enter the positions for the ${ship.name} (size: ${ship.size})`
+        `\nPlease enter the positions for the ${ship.name} (size: ${ship.size})\n`
       );
-      for (var i = 1; i < ship.size + 1; i++) {
-        const position = prompt(
-          `Enter position ${i} of ${ship.size} (i.e A3):`
+
+      var position = null;
+      do {
+        var input = prompt(
+          `Enter start position of ship ${ship.name} with size: ${ship.size} (i.e A3):`
         );
-        ship.addPosition(Battleship.ParsePosition(position));
-      }
+        position = Battleship.ParsePosition(input);
+      } while (position === null);
+
+      var orientation = null;
+      do {
+        orientation = prompt(
+          `Enter orientation for ship ${ship.name} with size: ${ship.size} ("right" or "bottom"):`
+        );
+      } while (!["right", "bottom"].includes(orientation));
+
+      var positions = [] || unwrap(position, ship.size, orientation);
+
+      positions.forEach((position) => {
+        ship.addPosition(position);
+      });
     });
   }
 
