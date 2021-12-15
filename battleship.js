@@ -4,6 +4,7 @@ const beep = require("beepbeep");
 const position = require("./GameController/position.js");
 const letters = require("./GameController/letters.js");
 
+const showError = require("./utils/error.js");
 const prompt = require("./utils/prompt.js");
 const delim = require("./utils/delim.js");
 const makeMenu = require("./utils/makeMenu.js");
@@ -90,9 +91,14 @@ class Battleship {
   makeTurn() {
     delim();
     console.log("< Player, it's your turn");
-    var position = Battleship.ParsePosition(
-      prompt("Enter coordinates for your shot :")
-    );
+
+    var position = null;
+    do {
+      position = Battleship.ParsePosition(
+        prompt("Enter coordinates for your shot:")
+      );
+    } while (position === null && showError());
+
     var isHit = gameController.CheckIsHit(this.enemyFleet, position);
     if (isHit) {
       beep();
@@ -178,14 +184,14 @@ class Battleship {
           `Enter start position of ship ${ship.name} with size: ${ship.size} (i.e A3):`
         );
         position = Battleship.ParsePosition(input);
-      } while (position === null);
+      } while (position === null && showError());
 
       var orientation = null;
       do {
         orientation = prompt(
           `Enter orientation for ship ${ship.name} with size: ${ship.size} ("right" or "bottom"):`
         );
-      } while (!["right", "bottom"].includes(orientation));
+      } while (!["right", "bottom"].includes(orientation) && showError());
 
       var positions = [] || unwrap(position, ship.size, orientation);
 
