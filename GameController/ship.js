@@ -1,9 +1,9 @@
 class Ship {
-    constructor(name, size, color) {
+    constructor(name, size, color, positions = []) {
         this.name = name;
         this.size = size;
         this.color = color;
-        this.positions = [];
+        this.positions = positions;
     }
 
     addPosition(position) {
