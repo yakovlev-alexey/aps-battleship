@@ -7,7 +7,8 @@
     "mocha": "mocha ./**/*Tests.js",
     "cucumber": "./node_modules/.bin/cucumber-js ./GameController_ATDD",
     "test": "nyc --nycrc-path ./.nycrc mocha ./**/*Tests.js",
-    "lint": "eslint *.js **/*.js"
+    "lint": "eslint **/*.js && npx prettier --debug-check -c \"**/*.js\"",
+    "prettify": "npx prettier --write -c \"**/*.js\""
   },
   "author": "",
   "license": "ISC",
@@ -42,6 +43,7 @@
     "eslint": "^8.4.1",
     "mocha-junit-reporter": "^2.0.2",
     "nyc": "^15.1.0",
-    "sinon": "^12.0.1"
+    "sinon": "^12.0.1",
+    "prettier": "^2.5.1"
   }
 }
