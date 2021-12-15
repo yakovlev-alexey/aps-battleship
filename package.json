@@ -7,7 +7,7 @@
     "mocha": "mocha ./**/*Tests.js",
     "cucumber": "./node_modules/.bin/cucumber-js ./GameController_ATDD",
     "test": "nyc --nycrc-path ./.nycrc mocha ./**/*Tests.js",
-    "lint": "eslint **/*.js"
+    "lint": "eslint *.js **/*.js"
   },
   "author": "",
   "license": "ISC",
