@@ -152,7 +152,6 @@ class Battleship {
   InitializeGame() {
     var seed = Math.floor(Math.random() * config.length);
     this.InitializeEnemyFleet(config[seed]);
-    this.enemyFleet.forEach((s) => console.log(s), seed);
     this.InitializeMyFleet();
   }
 
